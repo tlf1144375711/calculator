@@ -109,9 +109,11 @@
         function b0() { str = str + K0.innerHTML; h2.innerHTML = str }
         function bD() { str = str + KD.innerHTML; h2.innerHTML = str }
         function clear() {
+            if (confirm('确定要清空么？')) {
             str = ''
             h1.innerHTML = '0'
             localStorage.clear()
+            }
         }
         function bO() {
             h1.innerHTML = Number(h1.innerHTML) + Number(str)
@@ -125,7 +127,8 @@
             return date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
         }
         function backspace() {
-            if (h2.innerHTML == '_') {
+            if (h2.innerHTML.length == 1) {
+                h2.innerHTML = '_'
                 return
             }
             else {
