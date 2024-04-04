@@ -12,17 +12,16 @@
         padding: 0;
         text-align: center;
         font-family: 'Courier New', Courier, monospace;
+        font-size: 1.5rem;
     }
 
-    .container {
-        margin-top: 17rem;
+    body {
+        margin-top: 13rem;
     }
 
     h1,
     h2 {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        font-size: 2rem;
+        margin-bottom: 1rem;
     }
 
     .line {
@@ -31,41 +30,39 @@
     }
 
     button {
-        background-color: #fff;
-        text-align: center;
-        font-size: 2rem;
-        width: 6rem;
-        height: 4rem;
-        border: #fff;
+        background-color: transparent;
+        border: transparent;
+        width: 4rem;
+        height: 2.5rem;
+    }
+
+    button:active {
+        background-color: aliceblue;
     }
 </style>
 
 <body>
-    <div class="container">
-        <h1>0</h1>
-        <h2>_</h2>
-        <div class="keyboard">
-            <div class="line">
-                <button id="K7">7</button>
-                <button id="K8">8</button>
-                <button id="K9">9</button>
-            </div>
-            <div class="line">
-                <button id="K4">4</button>
-                <button id="K5">5</button>
-                <button id="K6">6</button>
-            </div>
-            <div class="line">
-                <button id="K1">1</button>
-                <button id="K2">2</button>
-                <button id="K3">3</button>
-            </div>
-            <div class="line">
-                <button id="KD">.</button>
-                <button id="K0">0</button>
-                <button id="KO">OK</button>
-            </div>
-        </div>
+    <h1>0</h1>
+    <h2>_</h2>
+    <div class="line">
+        <button id="K7">7</button>
+        <button id="K8">8</button>
+        <button id="K9">9</button>
+    </div>
+    <div class="line">
+        <button id="K4">4</button>
+        <button id="K5">5</button>
+        <button id="K6">6</button>
+    </div>
+    <div class="line">
+        <button id="K1">1</button>
+        <button id="K2">2</button>
+        <button id="K3">3</button>
+    </div>
+    <div class="line">
+        <button id="KD">.</button>
+        <button id="K0">0</button>
+        <button id="KO">OK</button>
     </div>
     <script>
         const h1 = document.querySelector('h1')
@@ -110,9 +107,9 @@
         function bD() { str = str + KD.innerHTML; h2.innerHTML = str }
         function clear() {
             if (confirm('确定要清空么？')) {
-            str = ''
-            h1.innerHTML = '0'
-            localStorage.clear()
+                str = ''
+                h1.innerHTML = '0'
+                localStorage.clear()
             }
         }
         function bO() {
