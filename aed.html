@@ -1,0 +1,336 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>大连AED分布图</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <style>
+        html,
+        body,
+        #container {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <div class="info">大连AED分布图</div>
+    <script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=2.0&key=85537b04acad4ab75554b20ba786bf79"></script>
+    <script>
+        var LabelsData = [
+            {
+                position: [121.627615, 38.913508],
+                text: {
+                    content: "大连西科姆电子安全有限公司"
+                }
+            },
+            {
+                position: [121.629453, 38.914315],
+                text: {
+                    content: '大和事务处理中心（大连）有限公司',
+                }
+            },
+            {
+                position: [121.648296, 38.921482],
+                text: {
+                    content: 'G·NEXT高尔夫会所大连店',
+                }
+            },
+            {
+                position: [121.513478, 38.847481],
+                text: {
+                    content: '软银科技有限公司',
+                }
+            },
+            {
+                position: [121.864587, 39.079596],
+                text: {
+                    content: '电化电子材料（大连）有限公司29栋',
+                }
+            },
+            {
+                position: [121.864628, 39.079511],
+                text: {
+                    content: '电化电子材料（大连）有限公司30栋',
+                }
+            },
+            {
+                position: [121.627774, 38.913723],
+                text: {
+                    content: '大连森茂大厦有限公司',
+                }
+            },
+            {
+                position: [121.769069, 39.0404],
+                text: {
+                    content: 'G·NEXT高尔夫会所槐城别墅店',
+                }
+            },
+            {
+                position: [121.819864, 39.074812],
+                text: {
+                    content: '帝业技凯（辽宁）精密工业有限公司 员工通道',
+                }
+            },
+            {
+                position: [121.821761, 39.075645],
+                text: {
+                    content: '帝业技凯（辽宁）精密工业有限公司 宿舍食堂',
+                }
+            },
+            {
+                position: [121.777213, 39.061602],
+                text: {
+                    content: '阿自倍尔仪表（大连）有限公司',
+                }
+            },
+            {
+                position: [121.745923, 39.048221],
+                text: {
+                    content: '大连三岛食品有限公司',
+                }
+            },
+            {
+                position: [121.627736, 38.913534],
+                text: {
+                    content: '日邮物流（中国）有限公司 大连AED-2150',
+                }
+            },
+            {
+                position: [121.925902, 39.096292],
+                text: {
+                    content: '大连蒂业技凯瓦轴工业有限公司厚生栋宿舍门口',
+                }
+            },
+            {
+                position: [121.92714, 39.095939],
+                text: {
+                    content: '大连蒂业技凯瓦轴工业有限公司工厂一楼车间',
+                }
+            },
+            {
+                position: [121.788915, 39.063579],
+                text: {
+                    content: 'TDK大连电子有限公司A栋车间内部',
+                }
+            },
+            {
+                position: [121.788286, 39.063246],
+                text: {
+                    content: 'TDK大连电子有限公司B栋车间内部',
+                }
+            },
+            {
+                position: [121.787706, 39.063745],
+                text: {
+                    content: 'TDK大连电子有限公司D栋车间内部',
+                }
+            },
+            {
+                position: [121.862775, 39.056732],
+                text: {
+                    content: '大连味思开生物技术有限公司保安室',
+                }
+            },
+            {
+                position: [121.627416, 38.913744],
+                text: {
+                    content: '大金（中国）投资有限公司',
+                }
+            },
+            {
+                position: [121.787302, 39.058245],
+                text: {
+                    content: '第一工厂和第二工厂',
+                }
+            },
+            {
+                position: [121.723028, 39.28865],
+                text: {
+                    content: '第三工厂',
+                }
+            },
+            {
+                position: [121.515666, 38.841915],
+                text: {
+                    content: '软件园河口园区32号楼',
+                }
+            },
+            {
+                position: [121.511026, 38.844967],
+                text: {
+                    content: '思佰益必智信息技术（大连）有限公司工会委员会',
+                }
+            },
+            {
+                position: [121.532035, 38.865391],
+                text: {
+                    content: '豪之英科技大厦A座',
+                }
+            },
+            {
+                position: [121.532035, 38.865391],
+                text: {
+                    content: '豪之英科技大厦B座',
+                }
+            },
+            {
+                position: [121.821622, 39.074693],
+                text: {
+                    content: '帝业技凯（辽宁）精密工业有限公司第三工厂',
+                }
+            },
+            {
+                position: [121.868517, 39.068225],
+                text: {
+                    content: '千代达电子制造（大连）有限公司',
+                }
+            },
+            {
+                position: [121.770012, 39.039972],
+                text: {
+                    content: '大连槐城别墅有限公司',
+                }
+            },
+            {
+                position: [121.803518, 39.055828],
+                text: {
+                    content: '稻畑工贸（大连保税区）有限公司  车间',
+                }
+            },
+            {
+                position: [121.859821, 39.071969],
+                text: {
+                    content: '大连好侍食品有限公司 2楼办公室',
+                }
+            },
+            {
+                position: [121.86069, 39.071915],
+                text: {
+                    content: '大连好侍食品有限公司 一工厂车间',
+                }
+            },
+            {
+                position: [121.859842, 39.071603],
+                text: {
+                    content: '大连好侍食品有限公司 保安室',
+                }
+            },
+            {
+                position: [121.860695, 39.071574],
+                text: {
+                    content: '大连好侍食品有限公司 二工厂车间',
+                }
+            },
+            {
+                position: [121.822966, 39.051284],
+                text: {
+                    content: '大连库利艾特医疗制品有限公司',
+                }
+            },
+            {
+                position: [121.791583, 39.063652],
+                text: {
+                    content: 'TDK大连电子有限公司食堂',
+                }
+            },
+            {
+                position: [121.865636, 39.068153],
+                text: {
+                    content: '帕斯卡（大连）有限公司',
+                }
+            },
+            {
+                position: [121.79392, 39.056343],
+                text: {
+                    content: '大连中村技研有限公司正门门岗',
+                }
+            },
+            {
+                position: [121.764123, 39.048202],
+                text: {
+                    content: '大连西科姆电子安全有限公司（金普分公司）',
+                }
+            },
+            {
+                position: [121.868071, 39.076867],
+                text: {
+                    content: '旭产业会议室',
+                }
+            },
+            {
+                position: [121.534204, 38.887402],
+                text: {
+                    content: '索尼信息系统（中国）有限公司',
+                }
+            },
+            {
+                position: [121.320544, 38.893299],
+                text: {
+                    content: '井村屋(大连)食品有限公司',
+                }
+            }
+        ];
+    </script>
+    <script type="text/javascript">
+        // document.getElementsByClassName("info").innerHTML = LabelsData.length;
+        
+        var map = new AMap.Map('container', {
+            zoom: 10.5,
+            center: [121.619899, 39.076006],
+            showIndoorMap: false,
+            mapStyle: 'amap://styles/whitesmoke',
+            viewMode: '2D',
+            resizeEnable: true
+        });
+        var markers = [];
+        var allowCollision = false;
+        var layer = new AMap.LabelsLayer({
+            fitView: true,
+            collision: false
+        });
+        layer.add(markers);
+        // 图层添加到地图
+        map.add(layer);
+        // 初始化 labelMarker
+        for (var i = 0; i < LabelsData.length; i++) {
+            var curData = LabelsData[i];
+            curData.text.direction = "right";
+            curData.icon = {
+                type: 'image',
+                image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAMFBMVEVMaXHYHQXYHQXYHQXYHQXYHQXYHQXYHQXYHQXYHQXYHQXYHQXXHQXYHQXXHQXYHQWhiOGSAAAAD3RSTlMAAvsbC9zQjuMq8H+oPL4V+AdoAAAACXBIWXMAAAsTAAALEwEAmpwYAAAArUlEQVQokX1SCQ7EIAhEELza8P/fbvBa1m5KYmmZziiDAK8R5iPsj1UORNFeI9HCLcUmtXIiSlyrtLiYhbVHziNzGUhkRVS/2GQDJMXxJ66syShG0J/AQaGjbIEEAOUEcAIx/5cKcD2BC4K1cUipam/EnXcR+mmtFfEIqmyvyO2PyvR1sWwENe9650w1VHH17vw1vLqm525WzRjND3Aht8j9qA+5Q8aP/v3O9PgAjUUNrh6rCM4AAAAASUVORK5CYII=',
+                size: [24, 24],
+                anchor: 'center'
+            };
+            curData.text.offset = [-20, -5];
+            curData.text.style = {
+                fontSize: 12,
+                fillColor: '#22886f',
+                strokeColor: '#fff',
+                strokeWidth: 2,
+                fold: true,
+                padding: '2, 5'
+            };
+            curData.extData = {
+                index: i
+            };
+            var labelMarker = new AMap.LabelMarker(curData);
+            markers.push(labelMarker);
+        }
+        layer.add(markers);
+        const clickHandler = function (e) {
+            alert('您在[ ' + e.lnglat.getLng() + ',' + e.lnglat.getLat() + ' ]的位置点击了地图！');
+        };
+        // 绑定事件
+        // map.on('click', clickHandler);
+    </script>
+</body>
+
+</html>
