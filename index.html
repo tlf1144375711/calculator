@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .container {
+        margin-top: 17rem;
+    }
+
+    h1,
+    h2 {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+    }
+
+    .line {
+        display: flex;
+        justify-content: center;
+    }
+
+    button {
+        background-color: #fff;
+        text-align: center;
+        font-size: 2rem;
+        width: 6rem;
+        height: 4rem;
+        border: #fff;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>0</h1>
+        <h2>_</h2>
+        <div class="keyboard">
+            <div class="line">
+                <button id="K7">7</button>
+                <button id="K8">8</button>
+                <button id="K9">9</button>
+            </div>
+            <div class="line">
+                <button id="K4">4</button>
+                <button id="K5">5</button>
+                <button id="K6">6</button>
+            </div>
+            <div class="line">
+                <button id="K1">1</button>
+                <button id="K2">2</button>
+                <button id="K3">3</button>
+            </div>
+            <div class="line">
+                <button id="KD">.</button>
+                <button id="K0">0</button>
+                <button id="KO">OK</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const h1 = document.querySelector('h1')
+        const h2 = document.querySelector('h2')
+        const K1 = document.querySelector('#K1')
+        const K2 = document.querySelector('#K2')
+        const K3 = document.querySelector('#K3')
+        const K4 = document.querySelector('#K4')
+        const K5 = document.querySelector('#K5')
+        const K6 = document.querySelector('#K6')
+        const K7 = document.querySelector('#K7')
+        const K8 = document.querySelector('#K8')
+        const K9 = document.querySelector('#K9')
+        const K0 = document.querySelector('#K0')
+        const KD = document.querySelector('#KD')
+        const KO = document.querySelector('#KO')
+        h1.addEventListener('click', clear)
+        h2.addEventListener('click', backspace)
+        K1.addEventListener('click', b1)
+        K2.addEventListener('click', b2)
+        K3.addEventListener('click', b3)
+        K4.addEventListener('click', b4)
+        K5.addEventListener('click', b5)
+        K6.addEventListener('click', b6)
+        K7.addEventListener('click', b7)
+        K8.addEventListener('click', b8)
+        K9.addEventListener('click', b9)
+        K0.addEventListener('click', b0)
+        KD.addEventListener('click', bD)
+        KO.addEventListener('click', bO)
+        let str = ''
+        function b1() { str = str + K1.innerHTML; h2.innerHTML = str }
+        function b2() { str = str + K2.innerHTML; h2.innerHTML = str }
+        function b3() { str = str + K3.innerHTML; h2.innerHTML = str }
+        function b4() { str = str + K4.innerHTML; h2.innerHTML = str }
+        function b5() { str = str + K5.innerHTML; h2.innerHTML = str }
+        function b6() { str = str + K6.innerHTML; h2.innerHTML = str }
+        function b7() { str = str + K7.innerHTML; h2.innerHTML = str }
+        function b8() { str = str + K8.innerHTML; h2.innerHTML = str }
+        function b9() { str = str + K9.innerHTML; h2.innerHTML = str }
+        function b0() { str = str + K0.innerHTML; h2.innerHTML = str }
+        function bD() { str = str + KD.innerHTML; h2.innerHTML = str }
+        function clear() {
+            str = ''
+            h1.innerHTML = '0'
+            localStorage.clear()
+        }
+        function bO() {
+            h1.innerHTML = Number(h1.innerHTML) + Number(str)
+            localStorage.setItem("累计支出", h1.innerHTML)
+            localStorage.setItem(getDay(), str)
+            str = ''
+            h2.innerHTML = '_'
+        }
+        function getDay() {
+            let date = new Date()
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
+        }
+        function backspace() {
+            if (h2.innerHTML == '_') {
+                return
+            }
+            else {
+                str = str.slice(0, str.length - 1)
+                h2.innerHTML = str
+            }
+        }
+        ; (function () { h1.innerHTML = localStorage.getItem("累计支出") || 0 })()
+    </script>
+</body>
+
+</html>
