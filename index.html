@@ -16,12 +16,15 @@
     }
 
     body {
-        margin-top: 13rem;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
     }
 
     h1,
     h2 {
+        margin: auto;
         margin-bottom: 1rem;
+        width: 5rem;
     }
 
     .line {
@@ -39,9 +42,26 @@
     button:active {
         background-color: aliceblue;
     }
+
+    ul li {
+        font-size: 0.7rem;
+        margin-bottom: 0.5rem;
+    }
+
+    ul {
+        margin-bottom: 2rem;
+    }
 </style>
 
 <body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
     <h1>0</h1>
     <h2>_</h2>
     <div class="line">
@@ -65,6 +85,7 @@
         <button id="KO">OK</button>
     </div>
     <script>
+        const lis = document.querySelectorAll('li')
         const h1 = document.querySelector('h1')
         const h2 = document.querySelector('h2')
         const K1 = document.querySelector('#K1')
@@ -79,7 +100,7 @@
         const K0 = document.querySelector('#K0')
         const KD = document.querySelector('#KD')
         const KO = document.querySelector('#KO')
-        h1.addEventListener('click', clear)
+        h1.addEventListener('click', clearAll)
         h2.addEventListener('click', backspace)
         K1.addEventListener('click', b1)
         K2.addEventListener('click', b2)
@@ -93,7 +114,6 @@
         K0.addEventListener('click', b0)
         KD.addEventListener('click', bD)
         KO.addEventListener('click', bO)
-        let str = ''
         function b1() { str = str + K1.innerHTML; h2.innerHTML = str }
         function b2() { str = str + K2.innerHTML; h2.innerHTML = str }
         function b3() { str = str + K3.innerHTML; h2.innerHTML = str }
@@ -105,36 +125,115 @@
         function b9() { str = str + K9.innerHTML; h2.innerHTML = str }
         function b0() { str = str + K0.innerHTML; h2.innerHTML = str }
         function bD() { str = str + KD.innerHTML; h2.innerHTML = str }
-        function clear() {
-            if (confirm('确定要清空么？')) {
-                str = ''
-                h1.innerHTML = '0'
-                localStorage.clear()
-            }
-        }
-        function bO() {
-            h1.innerHTML = Number(h1.innerHTML) + Number(str)
-            localStorage.setItem("累计支出", h1.innerHTML)
-            localStorage.setItem(getDay(), str)
-            str = ''
-            h2.innerHTML = '_'
-        }
-        function getDay() {
+        let str = ''
+        let arr = [
+            ['total',]
+        ]
+        function date() {
             let date = new Date()
             return date.toLocaleDateString() + ' ' + date.toLocaleTimeString()
         }
         function backspace() {
             if (h2.innerHTML.length == 1) {
-                h2.innerHTML = '_'
                 str = ''
+                h2.innerHTML = '_'
                 return
             }
-            else {
-                str = str.slice(0, str.length - 1)
-                h2.innerHTML = str
+            str = str.slice(0, str.length - 1)
+            h2.innerHTML = str
+        }
+        function bO() {
+            if (str == 0) {
+                clearH2()
+                return
+            }
+
+            arr.push([date(), str])
+            h1.innerHTML = sum()
+            clearH2()
+            updateList()
+            saveData()
+            console.table(arr)
+        }
+        function sum() {
+            let sum = 0
+            for (let i = 1; i < arr.length; i++) {
+                sum += Number(arr[i][1])
+            }
+            arr[0][1] = sum.toFixed(1)
+            return arr[0][1]
+        }
+        function clearH2() {
+            str = ''
+            h2.innerHTML = '_'
+        }
+        function clearAll() {
+            if (confirm('清空？')) {
+                localStorage.clear()
+                arr = [
+                    ['total',]
+                ]
+                str = ''
+                h1.innerHTML = '0'
+                h2.innerHTML = '_'
+                for (const li of lis) {
+                    li.innerHTML = ''
+                }
             }
         }
-        ; (function () { h1.innerHTML = localStorage.getItem("累计支出") || 0 })()
+        function updateList() {
+            switch (arr.length) {
+                case 1:
+                    return
+                case 2:
+                    lis[5].innerHTML = arr[1][0] + "=>" + arr[1][1]
+                    break;
+                case 3:
+                    lis[5].innerHTML = arr[2][0] + "=>" + arr[2][1]
+                    lis[4].innerHTML = arr[1][0] + "=>" + arr[1][1]
+                    break;
+                case 4:
+                    lis[5].innerHTML = arr[3][0] + "=>" + arr[3][1]
+                    lis[4].innerHTML = arr[2][0] + "=>" + arr[2][1]
+                    lis[3].innerHTML = arr[1][0] + "=>" + arr[1][1]
+                    break;
+                case 5:
+                    lis[5].innerHTML = arr[4][0] + "=>" + arr[4][1]
+                    lis[4].innerHTML = arr[3][0] + "=>" + arr[3][1]
+                    lis[3].innerHTML = arr[2][0] + "=>" + arr[2][1]
+                    lis[2].innerHTML = arr[1][0] + "=>" + arr[1][1]
+                    break;
+                case 6:
+                    lis[5].innerHTML = arr[5][0] + "=>" + arr[5][1]
+                    lis[4].innerHTML = arr[4][0] + "=>" + arr[4][1]
+                    lis[3].innerHTML = arr[3][0] + "=>" + arr[3][1]
+                    lis[2].innerHTML = arr[2][0] + "=>" + arr[2][1]
+                    lis[1].innerHTML = arr[1][0] + "=>" + arr[1][1]
+                    break;
+                default:
+                    let nArr = arr.slice(arr.length - 6)
+                    for (let i = 0; i < lis.length; i++) {
+                        lis[i].innerHTML = nArr[i][0] + '=>' + nArr[i][1]
+                    }
+                    break;
+            }
+        }
+        function saveData() {
+            localStorage.clear()
+            arr.forEach((item, index) => {
+                localStorage.setItem(index, item)
+            });
+        }
+        function loadData() {
+            for (let i = 0; i < localStorage.length; i++) {
+                arr[i] = localStorage[i].split(',')
+            }
+        }
+        ; (function () {
+            loadData()
+            updateList()
+            h1.innerHTML = arr[0][1] || 0
+        })()
     </script>
 </body>
 
