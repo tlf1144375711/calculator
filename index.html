@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>简易记帐</title>
+    <script src="./moment.min.js"></script>
 </head>
 <style>
     * {
@@ -130,8 +131,8 @@
             ['total',]
         ]
         function date() {
-            let date = new Date()
-            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString().toString()
+            let now = moment().format("M.D HH:MM");
+            return now
         }
         function backspace() {
             if (h2.innerHTML.length == 1) {
